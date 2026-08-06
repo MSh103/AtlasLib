@@ -37,7 +37,7 @@ namespace Atlas
 		glfwSwapBuffers(m_Window);
 	}
 
-	bool Window::ShouldWindowClose()
+	bool Window::ShouldClose() const
 	{
 		return static_cast<bool>(glfwWindowShouldClose(m_Window));
 	}
@@ -47,7 +47,7 @@ namespace Atlas
 		glfwWindowShouldClose(m_Window);
 	}
 
-	const float& Window::GetTime()
+	float Window::GetTime()
 	{
 		return static_cast<float>(glfwGetTime());
 	}

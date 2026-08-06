@@ -32,11 +32,11 @@ namespace Atlas
 		//void SetVSync(const bool& s);
 		//bool IsVSync();
 
-		bool ShouldWindowClose();
+		bool ShouldClose() const;
 
 		void Close();
 
-		const float& GetTime();
+		float GetTime();
 
 	private:
 		GLFWwindow* m_Window;
