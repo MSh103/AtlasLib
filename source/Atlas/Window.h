@@ -39,7 +39,7 @@ namespace Atlas
 		float GetTime();
 
 	private:
-		GLFWwindow* m_Window;
+		GLFWwindow* m_Window = nullptr;
 		
 		WindowProps m_Props;
 	};
