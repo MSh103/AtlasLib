@@ -29,9 +29,17 @@ namespace Atlas
 
 	void Application::OnEvent(Event& e)
 	{
-		Log::Core::Trace("Event Fired: {}", e.ToString());
-		if (e.GetEventType() == EventType::WindowClose)
-			m_Running = false;
+		EventDispatcher dispatcher(e);
+		
+		dispatcher.Dispatch<WindowCloseEvent>([this](WindowCloseEvent& e) {
+				return OnCloseEvent(e);
+			});
+	}
+
+	bool Application::OnCloseEvent(WindowCloseEvent& e)
+	{
+		m_Running = false;
+		return true;
 	}
 
 	int Application::Run()

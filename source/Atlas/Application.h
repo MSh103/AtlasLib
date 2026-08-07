@@ -24,6 +24,9 @@ namespace Atlas
 		static Application* Get() { return s_Instance; }
 
 	private:
+		bool OnCloseEvent(WindowCloseEvent& e);
+
+	private:
 		Window m_Window;
 
 		//ApplicationSpecification m_Spec;
