@@ -1,5 +1,7 @@
 #include "Application.h"
 
+#include <glad/glad.h>
+
 namespace Atlas
 {
 
@@ -22,6 +24,10 @@ namespace Atlas
 				m_Running = false;
 
 			m_Window.OnUpdate();
+			glClear(GL_COLOR_BUFFER_BIT);
+			glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
+
+
 		}
 
 		return 0;

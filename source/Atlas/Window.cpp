@@ -1,5 +1,6 @@
 #include "Window.h"
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include "Log.h"
@@ -15,7 +16,7 @@ namespace Atlas
 		: m_Props(props)
 	{
 		glfwSetErrorCallback(errorCallback);
-		if (!glfwInit())
+		if (!glfwInit())	
 		{
 			AT_ASSERT(false, "Failed to initialize GLFW!");
 			Log::Core::Error("Failed to initialize GLFW!");
@@ -31,10 +32,20 @@ namespace Atlas
 			glfwTerminate();
 			return;
 		}
-
 		Log::Core::Trace("Created Window {}: {}x{}", props.Title, props.Width, props.Height);
-
 		glfwMakeContextCurrent(m_Window);
+
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+		{
+			AT_ASSERT(false, "Failed to load Glad!");
+			Log::Core::Error("Failed to load Glad!");
+			return;
+		}
+
+		Log::Core::Trace("OpenGL Info:");
+		Log::Core::Trace("\tVendor:\t\t{}", reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
+		Log::Core::Trace("\tRenderer:\t{}", reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+		Log::Core::Trace("\tVersion:\t{}", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 
 	}
 
@@ -46,6 +57,7 @@ namespace Atlas
 
 	void Window::OnUpdate()
 	{
+		glViewport(0, 0, m_Props.Width, m_Props.Height);
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
 	}
