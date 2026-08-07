@@ -1,8 +1,10 @@
 #pragma once
 
 #include "Core.h"
+#include "Event.h"
 
 #include <string>
+#include <functional>
 struct GLFWwindow;
 
 namespace Atlas
@@ -18,6 +20,8 @@ namespace Atlas
 		{}
 	};
 
+	using EventCallbackFn = std::function<void(Event&)>;
+
 	class Window
 	{
 	public:
@@ -32,6 +36,8 @@ namespace Atlas
 		//void SetVSync(const bool& s);
 		//bool IsVSync();
 
+		inline void SetEventCallback(const EventCallbackFn& cb) { m_WindowData.EventCallback = cb; }
+
 		bool ShouldClose() const;
 
 		void Close();
@@ -41,6 +47,10 @@ namespace Atlas
 	private:
 		GLFWwindow* m_Window = nullptr;
 		
-		WindowProps m_Props;
+		struct WindowData
+		{
+			WindowProps Props;
+			EventCallbackFn EventCallback;
+		} m_WindowData;
 	};
 }

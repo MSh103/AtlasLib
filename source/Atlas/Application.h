@@ -17,6 +17,8 @@ namespace Atlas
 		Application(const ApplicationSpecification& spec);
 		~Application();
 
+		void OnEvent(Event& e);
+
 		int Run();
 
 		static Application* Get() { return s_Instance; }

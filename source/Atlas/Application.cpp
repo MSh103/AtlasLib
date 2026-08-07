@@ -13,6 +13,10 @@ namespace Atlas
 		AT_ASSERT(s_Instance == nullptr, "Application already exists!");
 		s_Instance = this;
 
+		m_Window.SetEventCallback([this](Event& e) {
+			OnEvent(e);
+		});
+
 		Log::Core::Trace("Hello, World from Application!");
 	}
 
@@ -23,13 +27,17 @@ namespace Atlas
 		Log::Core::Trace("Shutting down...");
 	}
 
+	void Application::OnEvent(Event& e)
+	{
+		Log::Core::Trace("Event Fired: {}", e.ToString());
+		if (e.GetEventType() == EventType::WindowClose)
+			m_Running = false;
+	}
+
 	int Application::Run()
 	{
 		while (m_Running)
 		{
-			if (m_Window.ShouldClose())
-				m_Running = false;
-
 			glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 

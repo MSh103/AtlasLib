@@ -7,15 +7,13 @@
 
 namespace Atlas
 {
-	void errorCallback(int error, const char* desc)
-	{
-		Log::Core::Error("GLFW error {}: {}", error, desc);
-	}
 
 	Window::Window(const WindowProps& props)
-		: m_Props(props)
 	{
-		glfwSetErrorCallback(errorCallback);
+		m_WindowData.Props = props;
+		glfwSetErrorCallback([](int error, const char* desc) {
+			Log::Core::Error("GLFW error {}: {}", error, desc);
+		});
 		if (!glfwInit())	
 		{
 			AT_ASSERT(false, "Failed to initialize GLFW!");
@@ -47,6 +45,15 @@ namespace Atlas
 		Log::Core::Trace("\tRenderer:\t{}", reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
 		Log::Core::Trace("\tVersion:\t{}", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 
+		glfwSetWindowUserPointer(m_Window, this);
+
+		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) {
+			auto* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			WindowData& data = self->m_WindowData;
+			WindowCloseEvent e;
+			data.EventCallback(e);
+		});
+
 	}
 
 	Window::~Window()
@@ -57,7 +64,7 @@ namespace Atlas
 
 	void Window::OnUpdate()
 	{
-		glViewport(0, 0, m_Props.Width, m_Props.Height);
+		glViewport(0, 0, m_WindowData.Props.Width, m_WindowData.Props.Height);
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
 	}
