@@ -6,17 +6,30 @@
 
 namespace Atlas
 {
+	struct ApplicationSpecification
+	{
+		WindowProps Window;
+	};
 
 	class Application
 	{
 	public:
-		Application(const WindowProps& props);
+		Application(const ApplicationSpecification& spec);
 		~Application();
 
 		int Run();
+
+		static Application* Get() { return s_Instance; }
+
 	private:
 		Window m_Window;
 
+		//ApplicationSpecification m_Spec;
+
 		bool m_Running = true;
+	private:
+		static Application* s_Instance;
 	};
+
+	Application* CreateApplication();
 }
