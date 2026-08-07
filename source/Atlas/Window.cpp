@@ -54,6 +54,16 @@ namespace Atlas
 			data.EventCallback(e);
 		});
 
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
+			auto* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			WindowData& data = self->m_WindowData;
+			data.Props.Width = width;
+			data.Props.Height = height;
+			WindowResizeEvent e(width, height);
+			data.EventCallback(e);
+			self->OnResize(width, height);
+		});
+
 	}
 
 	Window::~Window()
@@ -64,7 +74,6 @@ namespace Atlas
 
 	void Window::OnUpdate()
 	{
-		glViewport(0, 0, m_WindowData.Props.Width, m_WindowData.Props.Height);
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
 	}
@@ -76,12 +85,17 @@ namespace Atlas
 
 	void Window::Close()
 	{
-		glfwWindowShouldClose(m_Window);
+		glfwSetWindowShouldClose(m_Window, GLFW_TRUE);
 	}
 
 	float Window::GetTime()
 	{
 		return static_cast<float>(glfwGetTime());
+	}
+
+	void Window::OnResize(int width, int height)
+	{
+		glViewport(0, 0, width, height);
 	}
 
 }

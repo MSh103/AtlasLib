@@ -39,11 +39,11 @@ namespace Atlas
 		inline void SetEventCallback(const EventCallbackFn& cb) { m_WindowData.EventCallback = cb; }
 
 		bool ShouldClose() const;
-
 		void Close();
-
 		float GetTime();
 
+	private:
+		void OnResize(int width, int height);
 	private:
 		GLFWwindow* m_Window = nullptr;
 		
