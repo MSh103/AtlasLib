@@ -4,4 +4,3 @@
 #include "Atlas/Log.h"
 #include "Atlas/Window.h"
 #include "Atlas/Application.h"
-#include "Atlas/Entrypoint.h"

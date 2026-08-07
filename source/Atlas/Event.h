@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
+#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
 								virtual EventType GetEventType() const override { return GetStaticType(); }\
 								virtual const char* GetName() const override { return #type; }
 
@@ -27,7 +27,7 @@ namespace Atlas
 		virtual std::string ToString() const { return GetName(); }
 
 		void SetHandled(bool s) { m_Handled = s; }
-		bool Handled() { return m_Handled; }
+		bool Handled() const { return m_Handled; }
 	protected:
 		bool m_Handled = false;
 	};
