@@ -4,6 +4,7 @@
 #include "Log.h"
 #include "Window.h"
 #include "LayerStack.h"
+#include "TimeStep.h"
 
 namespace Atlas
 {
@@ -36,7 +37,8 @@ namespace Atlas
 		Window m_Window;
 		LayerStack m_LayerStack;
 
-		//ApplicationSpecification m_Spec;
+		TimeStep m_Time;
+		float m_LastFrame = 0.f;
 
 		bool m_Running = true;
 	private:

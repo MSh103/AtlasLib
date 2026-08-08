@@ -1,6 +1,6 @@
 #include "Application.h"
 
-#include <glad/glad.h>
+#include <glfw/glfw3.h>
 
 namespace Atlas
 {
@@ -77,8 +77,13 @@ namespace Atlas
 	{
 		while (m_Running)
 		{
+			float currentFrame = glfwGetTime();
+			m_Time = currentFrame - m_LastFrame;
+			m_LastFrame = currentFrame;
+
+
 			for (Layer* layer : m_LayerStack)
-				layer->OnUpdate();
+				layer->OnUpdate(m_Time);
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnRender();

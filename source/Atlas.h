@@ -5,5 +5,6 @@
 #include "Atlas/Window.h"
 #include "Atlas/Application.h"
 #include "Atlas/Layer.h"
+#include "Atlas/TimeStep.h"
 
 #include <glad/glad.h>
