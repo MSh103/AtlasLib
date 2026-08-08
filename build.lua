@@ -2,9 +2,11 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "vendor/glfw/include"
 IncludeDir["spdlog"] = "vendor/spdlog/include"
 IncludeDir["Glad"] = "vendor/Glad/include"
+IncludeDir["imgui"] = "vendor/imgui/"
 
 include "vendor/glfw"
 include "vendor/Glad"
+include "vendor/ImGui-build.lua"
 
 project "AtlasLib"
         kind "StaticLib"
@@ -26,12 +28,14 @@ project "AtlasLib"
                 "%{IncludeDir.GLFW}",
                 "%{IncludeDir.spdlog}",
                 "%{IncludeDir.Glad}",
+                "%{IncludeDir.imgui}",
         }
 
         links
         {
                 "GLFW",
                 "Glad",
+                "imgui",
                 "opengl32.lib",
                 "dwmapi.lib",
         }
