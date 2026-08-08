@@ -2,8 +2,8 @@
 
 #include "Core.h"
 #include "Log.h"
-#include "Window.h"
-#include "LayerStack.h"
+#include "Atlas/Window/Window.h"
+#include "Atlas/Layers/LayerStack.h"
 #include "TimeStep.h"
 
 namespace Atlas

@@ -2,6 +2,8 @@
 
 #include <glfw/glfw3.h>
 
+#include <Atlas/Events/ApplicationEvents.h>
+
 namespace Atlas
 {
 
