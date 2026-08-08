@@ -77,7 +77,7 @@ namespace Atlas
 	{
 		while (m_Running)
 		{
-			float currentFrame = static_cast<double>(glfwGetTime());
+			float currentFrame = static_cast<float>(glfwGetTime());
 			m_Time = currentFrame - m_LastFrame;
 			m_LastFrame = currentFrame;
 

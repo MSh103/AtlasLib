@@ -9,7 +9,7 @@ namespace Atlas
 	class KeyEvent : public Event
 	{
 	public:
-		inline Keyboard::Key GetKeyCode() { return m_KeyCode; }
+		inline Keyboard::Key GetKeyCode() const { return m_KeyCode; }
 	protected:
 		KeyEvent(Keyboard::Key keycode)
 			: m_KeyCode(keycode)
@@ -71,7 +71,7 @@ namespace Atlas
 			return ss.str();
 		}
 
-		inline uint32_t GetCodePoint() { return m_CodePoint; }
+		inline uint32_t GetCodePoint() const { return m_CodePoint; }
 
 		EVENT_CLASS_TYPE(KeyTyped)
 	private:

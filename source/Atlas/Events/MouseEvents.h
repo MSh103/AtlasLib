@@ -36,7 +36,7 @@ namespace Atlas
 			:m_XOffset(xOffset), m_YOffset(yOffset)
 		{}
 
-		inline std::pair<float, float> Get() { return { m_XOffset, m_YOffset }; }
+		inline std::pair<float, float> Get() const { return { m_XOffset, m_YOffset }; }
 
 		std::string ToString() const override
 		{
@@ -70,7 +70,7 @@ namespace Atlas
 			:MouseButtonEvent(button), m_MouseX(x), m_MouseY(y)
 		{}
 
-		inline std::pair<float, float> Get() { return { m_MouseX, m_MouseY }; }
+		inline std::pair<float, float> Get() const { return { m_MouseX, m_MouseY }; }
 
 		std::string ToString() const override
 		{
@@ -95,7 +95,7 @@ namespace Atlas
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseButtonPressedEvent: " << Mouse::ToString(m_Button);
+			ss << "MouseButtonReleasedEvent: " << Mouse::ToString(m_Button);
 			return ss.str();
 		}
 

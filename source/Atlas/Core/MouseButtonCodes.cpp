@@ -16,7 +16,7 @@ namespace Atlas
 			case Button::Button4: return "Button4"; break;
 			case Button::Button5: return "Button5"; break;
 			case Button::Button6: return "Button6"; break;
-			case Button::Button7: return "BUtton7"; break;
+			case Button::Button7: return "Button7"; break;
 			case Button::Button8: return "Last"; break;
 			default:
 			{
