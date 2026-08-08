@@ -5,6 +5,7 @@
 #include "Atlas/Core/Application.h"
 #include "Atlas/Core/Core.h"
 #include "Atlas/Core/Entrypoint.h"
+#include "Atlas/Core/Input.h"
 #include "Atlas/Core/Log.h"
 #include "Atlas/Core/TimeStep.h"
 ///------------------------------------------
@@ -28,7 +29,6 @@
 ///---------------- Glad ------------------
 #include <glad/glad.h>
 ///------------------------------------------
-
 
 ///---------------- ImGui ------------------
 #include <imgui.h>
