@@ -18,8 +18,8 @@ namespace Atlas
 		void PopLayer(Layer* layer);
 		void PopOverlay(Layer* layer);
 
-		std::vector<Layer*>::iterator begin() { return m_Layers.begin(); }
-		std::vector<Layer*>::iterator end() { return m_Layers.end(); }
+		std::vector<Layer*>::iterator begin() { return m_Layers.begin(); }	// Helper function
+		std::vector<Layer*>::iterator end() { return m_Layers.end(); }		// Helper function
 
 	private:
 		std::vector<Layer*> m_Layers;
