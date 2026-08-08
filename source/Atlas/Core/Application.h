@@ -5,6 +5,8 @@
 #include "Atlas/Window/Window.h"
 #include "Atlas/Layers/LayerStack.h"
 #include "TimeStep.h"
+#include "Atlas/Events/Event.h"
+#include "Atlas/Events/WindowEvents.h"
 
 namespace Atlas
 {

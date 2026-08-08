@@ -4,7 +4,8 @@
 #include <sstream>
 
 #define EVENT_CLASS_TYPE(type) static ::Atlas::EventType GetStaticType() { return ::Atlas::EventType::type; }\
-								virtual ::Atlas::EventType GetEventType() const override { return GetStaticType(); }\
+				virtual ::Atlas::EventType GetEventType() const override { return GetStaticType(); }\
+				virtual const char* GetName() const override {return #type;}
 
 namespace Atlas
 {

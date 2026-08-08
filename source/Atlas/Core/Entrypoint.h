@@ -3,8 +3,8 @@
 
 #ifdef AT_PLATFORM_WINDOWS
 
-#include "Atlas/Log.h"
-#include "Atlas/Application.h"
+#include "Atlas/Core/Log.h"
+#include "Atlas/Core/Application.h"
 
 extern Atlas::Application* Atlas::CreateApplication();
 

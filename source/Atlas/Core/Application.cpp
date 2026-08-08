@@ -2,8 +2,6 @@
 
 #include <glfw/glfw3.h>
 
-#include <Atlas/Events/ApplicationEvents.h>
-
 namespace Atlas
 {
 
@@ -79,7 +77,7 @@ namespace Atlas
 	{
 		while (m_Running)
 		{
-			float currentFrame = glfwGetTime();
+			float currentFrame = static_cast<double>(glfwGetTime());
 			m_Time = currentFrame - m_LastFrame;
 			m_LastFrame = currentFrame;
 

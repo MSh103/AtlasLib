@@ -3,9 +3,13 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "Log.h"
+#include "Atlas/Core/Log.h"
+#include "Atlas/Events/Event.h"
+#include "Atlas/Events/WindowEvents.h"
+#include "Atlas/Events/KeyEvents.h"
+#include "Atlas/Events/MouseEvents.h"
 
-namespace Atlas
+namespace Atlas	
 {
 
 	Window::Window(const WindowProps& props)
@@ -64,6 +68,74 @@ namespace Atlas
 			self->OnResize(width, height);
 		});
 
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+			auto* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			WindowData& data = self->m_WindowData;
+			switch (action)
+			{
+				case GLFW_PRESS:
+				{
+					KeyPressedEvent e((Keyboard::Key)key, 0);
+					data.EventCallback(e);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					KeyReleasedEvent e((Keyboard::Key)key);
+					data.EventCallback(e);
+					break;
+				}
+				case GLFW_REPEAT:
+				{
+					KeyPressedEvent e((Keyboard::Key)key, 1);
+					data.EventCallback(e);
+					break;
+				}
+			}
+		});
+
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
+			auto* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			WindowData& data = self->m_WindowData;
+			switch (action)
+			{
+				case GLFW_PRESS:
+				{
+					double x, y;
+					glfwGetCursorPos(window, &x, &y);
+					MouseButtonPressedEvent e((Mouse::Button)button, x, y);
+					data.EventCallback(e);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					MouseButtonReleasedEvent e((Mouse::Button)button);
+					data.EventCallback(e);
+					break;
+				}
+			}
+		});
+
+		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset) {
+			auto* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			WindowData& data = self->m_WindowData;
+			MouseScrolledEvent e((float)xOffset, (float)yOffset);
+			data.EventCallback(e);
+		});
+
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos) {
+			auto* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			WindowData& data = self->m_WindowData;
+			MouseMovedEvent e((float)xPos, (float)yPos);
+			data.EventCallback(e);
+		});
+
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int codepoint) {
+			auto* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			WindowData& data = self->m_WindowData;
+			KeyTypedEvent e(codepoint);
+			data.EventCallback(e);
+		});
 	}
 
 	Window::~Window()
