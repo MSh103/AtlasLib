@@ -22,7 +22,7 @@ namespace Atlas
 		virtual void OnDetach() {}
 		virtual void OnUpdate(TimeStep ts) {}
 		virtual void OnRender() {}
-		//virtual void OnImGuiRender() {} // TODO Msh103: add imgui and ImGuiLayer
+		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& e) {}
 
 		const std::string& GetName() const { return m_DebugName; }

@@ -7,6 +7,9 @@
 #include "TimeStep.h"
 #include "Atlas/Events/Event.h"
 #include "Atlas/Events/WindowEvents.h"
+#include "Atlas/ImGui/ImGuiLayer.h"
+
+#include <memory>
 
 namespace Atlas
 {
@@ -30,14 +33,17 @@ namespace Atlas
 		void OnEvent(Event& e);
 		int Run();
 
-		static Application* Get() { return s_Instance; }
+		static Application& Get() { return *s_Instance; }
+
+		inline const std::unique_ptr<Window>& GetWindow() { return m_Window; }
 
 	private:
 		bool OnCloseEvent(WindowCloseEvent& e);
 
 	private:
-		Window m_Window;
+		std::unique_ptr<Window> m_Window;
 		LayerStack m_LayerStack;
+		ImGuiLayer* m_ImGuiLayer;
 
 		TimeStep m_Time;
 		float m_LastFrame = 0.f;

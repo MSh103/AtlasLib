@@ -8,14 +8,14 @@ namespace Atlas
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application(const ApplicationSpecification& spec)
-		: m_Window(spec.Window)
 	{
 		AT_ASSERT(s_Instance == nullptr, "Application already exists!");
 		s_Instance = this;
 
-		m_Window.SetEventCallback([this](Event& e) {
-			OnEvent(e);
-		});
+		m_Window = std::make_unique<Window>(spec.Window);
+		m_Window->SetEventCallback(AT_BIND_EVENT_FN(Application::OnEvent));
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 
 		Log::Core::Trace("Hello, World from Application!");
 	}
@@ -88,8 +88,12 @@ namespace Atlas
 			for (Layer* layer : m_LayerStack)
 				layer->OnRender();
 
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_LayerStack)
+				layer->OnImGuiRender();
+			m_ImGuiLayer->End();
 
-			m_Window.OnUpdate();
+			m_Window->OnUpdate();
 		}
 
 		return 0;

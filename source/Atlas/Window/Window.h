@@ -30,11 +30,13 @@ namespace Atlas
 
 		void OnUpdate();
 
-		//unsigned int GetWidth();
-		//unsigned int GetHeight();
+		inline unsigned int GetWidth() { return m_WindowData.Props.Width; }
+		inline unsigned int GetHeight() { return m_WindowData.Props.Height; }
 
 		//void SetVSync(const bool& s);
 		//bool IsVSync();
+
+		GLFWwindow* GetNativeHandle() { return m_Window; }
 
 		inline void SetEventCallback(const EventCallbackFn& cb) { m_WindowData.EventCallback = cb; }
 
