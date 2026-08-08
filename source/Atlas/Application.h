@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "Log.h"
 #include "Window.h"
+#include "LayerStack.h"
 
 namespace Atlas
 {
@@ -17,8 +18,13 @@ namespace Atlas
 		Application(const ApplicationSpecification& spec);
 		~Application();
 
-		void OnEvent(Event& e);
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* overlay);
 
+		void PopLayer(Layer* layer);
+		void PopOverlay(Layer* overlay);
+
+		void OnEvent(Event& e);
 		int Run();
 
 		static Application* Get() { return s_Instance; }
@@ -28,6 +34,7 @@ namespace Atlas
 
 	private:
 		Window m_Window;
+		LayerStack m_LayerStack;
 
 		//ApplicationSpecification m_Spec;
 

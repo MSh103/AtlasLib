@@ -22,18 +22,45 @@ namespace Atlas
 
 	Application::~Application()
 	{
-		s_Instance = nullptr;
-
 		Log::Core::Trace("Shutting down...");
+		s_Instance = nullptr;
+	}
+
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
+	}
+
+	void Application::PushOverlay(Layer* overlay)
+	{
+		m_LayerStack.PushOverlay(overlay);
+		overlay->OnAttach();
+	}
+
+	void Application::PopLayer(Layer* layer)
+	{
+		layer->OnDetach();
+		m_LayerStack.PopLayer(layer);
+	}
+
+	void Application::PopOverlay(Layer* overlay)
+	{
+		overlay->OnDetach();
+		m_LayerStack.PopOverlay(overlay);
 	}
 
 	void Application::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
-		
-		dispatcher.Dispatch<WindowCloseEvent>([this](WindowCloseEvent& e) {
-				return OnCloseEvent(e);
-			});
+		dispatcher.Dispatch<WindowCloseEvent>(AT_BIND_EVENT_FN(Application::OnCloseEvent));
+
+		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
+		{
+			(*--it)->OnEvent(e);
+			if (e.Handled())
+				break;
+		}
 	}
 
 	bool Application::OnCloseEvent(WindowCloseEvent& e)
@@ -46,8 +73,11 @@ namespace Atlas
 	{
 		while (m_Running)
 		{
-			glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			for (Layer* layer : m_LayerStack)
+				layer->OnUpdate();
+
+			for (Layer* layer : m_LayerStack)
+				layer->OnRender();
 
 
 			m_Window.OnUpdate();
