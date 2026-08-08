@@ -49,7 +49,7 @@ namespace Atlas
 			template<typename... Args>
 			static void Trace(fmt::format_string<Args...> string, Args&&... args)
 			{
-				Log::s_ClientLogger->trace(string, std::forward<Args>(args)...);
+				Log::s_CoreLogger->trace(string, std::forward<Args>(args)...);
 			}
 		};
 		

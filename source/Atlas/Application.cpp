@@ -29,23 +29,27 @@ namespace Atlas
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
+		Atlas::Log::Core::Trace("Pushing {} into LayerStack", layer->GetName());
 		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* overlay)
 	{
 		m_LayerStack.PushOverlay(overlay);
+		Atlas::Log::Core::Trace("Pushing {} into LayerStack", overlay->GetName());
 		overlay->OnAttach();
 	}
 
 	void Application::PopLayer(Layer* layer)
 	{
+		Atlas::Log::Core::Trace("Popping {} from LayerStack", layer->GetName());
 		layer->OnDetach();
 		m_LayerStack.PopLayer(layer);
 	}
 
 	void Application::PopOverlay(Layer* overlay)
 	{
+		Atlas::Log::Core::Trace("Popping {} from LayerStack", overlay->GetName());
 		overlay->OnDetach();
 		m_LayerStack.PopOverlay(overlay);
 	}

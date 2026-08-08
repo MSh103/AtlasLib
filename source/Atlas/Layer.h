@@ -23,6 +23,8 @@ namespace Atlas
 		//virtual void OnImGuiRender() {} // TODO Msh103: add imgui and ImGuiLayer
 		virtual void OnEvent(Event& e) {}
 
+		const std::string& GetName() const { return m_DebugName; }
+
 	private:
 		std::string m_DebugName;
 	};
