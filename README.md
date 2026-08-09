@@ -34,7 +34,6 @@ AtlasLib currently uses:
 * [GLAD](https://github.com/Dav1dde/glad) — OpenGL function loading
 * [spdlog](https://github.com/gabime/spdlog) — Logging
 * [Dear ImGui](https://github.com/ocornut/imgui) — Immediate-mode UI
-* [nlohmann/json](https://github.com/nlohmann/json) — JSON support
 
 Dependencies are included through Git submodules where applicable.
 
