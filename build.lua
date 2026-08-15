@@ -1,9 +1,3 @@
-IncludeDir = {}
-IncludeDir["GLFW"] = "vendor/glfw/include"
-IncludeDir["spdlog"] = "vendor/spdlog/include"
-IncludeDir["Glad"] = "vendor/Glad/include"
-IncludeDir["imgui"] = "vendor/imgui/"
-
 include "vendor/glfw"
 include "vendor/Glad"
 include "vendor/ImGui-build.lua"
