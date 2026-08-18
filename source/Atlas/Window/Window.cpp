@@ -24,7 +24,7 @@ namespace Atlas
 			Log::Core::Error("Failed to initialize GLFW!");
 			return;
 		}
-		Log::Core::Trace("Initialized GLFW!");
+		Log::Core::Info("Initialized GLFW!");
 
 		m_Window = glfwCreateWindow(props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
 		if (!m_Window)
@@ -44,10 +44,10 @@ namespace Atlas
 			return;
 		}
 
-		Log::Core::Trace("OpenGL Info:");
-		Log::Core::Trace("\tVendor:\t\t{}", reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
-		Log::Core::Trace("\tRenderer:\t{}", reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
-		Log::Core::Trace("\tVersion:\t{}", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
+		Log::Core::Info("OpenGL Info:");
+		Log::Core::Info("\tVendor:\t\t{}", reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
+		Log::Core::Info("\tRenderer:\t{}", reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+		Log::Core::Info("\tVersion:\t{}", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 
 		glfwSetWindowUserPointer(m_Window, this);
 
