@@ -33,6 +33,8 @@ namespace Atlas
 		void OnEvent(Event& e);
 		int Run();
 
+		inline bool IsRunning() { return m_Running; }
+
 		static Application& Get() { return *s_Instance; }
 
 		inline const std::unique_ptr<Window>& GetWindow() { return m_Window; }
