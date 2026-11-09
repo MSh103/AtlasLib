@@ -2,7 +2,7 @@ project "imgui"
         kind "StaticLib"
         language "C++"
         staticruntime "off"
-        location "imgui"
+        location "imgui-build"
 
         targetdir ("%{wks.location}/bin/%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}/%{prj.name}")
         objdir ("%{wks.location}/bin-int/%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}/%{prj.name}")
