@@ -165,6 +165,11 @@ namespace Atlas
 		return static_cast<float>(glfwGetTime());
 	}
 
+	void Window::SetCursorStatus(bool s)
+	{
+		glfwSetInputMode(m_Window, GLFW_CURSOR, s ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
+	}
+
 	void Window::OnResize(int width, int height)
 	{
 		glViewport(0, 0, width, height);

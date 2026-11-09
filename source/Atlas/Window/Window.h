@@ -43,12 +43,13 @@ namespace Atlas
 		bool ShouldClose() const;
 		void Close();
 		float GetTime();
+		void SetCursorStatus(bool s);
 
 	private:
 		void OnResize(int width, int height);
 	private:
 		GLFWwindow* m_Window = nullptr;
-		
+
 		struct WindowData
 		{
 			WindowProps Props;
