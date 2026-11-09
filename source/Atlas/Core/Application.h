@@ -39,6 +39,8 @@ namespace Atlas
 
 		inline const std::unique_ptr<Window>& GetWindow() { return m_Window; }
 
+		void Close() { m_Running = false; }
+
 	private:
 		bool OnCloseEvent(WindowCloseEvent& e);
 
